@@ -4,6 +4,7 @@ const path = require('path');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
 require('dotenv').config();
 
 // Express instance
@@ -12,6 +13,7 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Express petition routing
 app.use(require('./routes/routes'));

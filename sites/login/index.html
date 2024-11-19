@@ -60,23 +60,6 @@
 			</div>
 		</div>
 	</section>
-	<script>
-		var jwt_token;
-		async function login() {
-			const response = await fetch('/api/auth/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ username: userText.value, password: passwordText.value })
-			});
-			const jwt_token = response.json()
-			console.log(jwt_token);
-			console.log(jwt_token.headers)
-			console.log(response.headers)
-		}
-	</script>
-
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/popper.js"></script>
 	<script src="/public/js/bootstrap.min.js"></script>
