@@ -3,7 +3,7 @@ const path = require('path');
 const router = express.Router();
 const controller = require('../controller/controller')
 const multer = require('multer');
-const crypto = require('crypto'); // For generating random filenames
+const crypto = require('crypto');
 
 
 const storage = multer.diskStorage({
