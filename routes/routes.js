@@ -15,9 +15,7 @@ const storage = multer.diskStorage({
         const randomName = crypto.randomBytes(16).toString('hex'); // 16 bytes = 32-character string
         const ext = path.extname(file.originalname); // Extract the original file extension
         const newName = `${randomName}${ext}`; // Combine the random string with the file extension
-        console.log('a')
         cb(null, newName); // Save the file with the new name
-        console.log('b')
     },
 });
 
@@ -34,5 +32,10 @@ router.post('/publish', upload.single('image'), controller.publish);
 // Album route
 router.get('/album', controller.album);
 
+router.get('/registerPage', controller.registerPage);
+
+router.get('/posts', controller.posts);
+
+router.post('/delete', controller.delete);
 
 module.exports = router;

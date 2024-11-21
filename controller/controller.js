@@ -12,6 +12,25 @@ controller.album = (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'sites', 'album', 'index.html'));
 }
 
+controller.registerPage = (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'sites', 'register', 'index.html'));
+}
+
+
+controller.delete  = async (req, res) => {
+    // Delete image
+    let post = await Post.findOne({"_id":req.body.id});
+    let filePath = path.join(__dirname,'..','public',post.image)
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error("Error deleting file:", err);
+        } else {
+            console.log(`File at ${filePath} deleted successfully`);
+        }
+    });
+    // Delete database entry aswell
+    await Post.deleteOne({"_id":req.body.id });
+}
 
 
 controller.publish = async (req, res) => {
@@ -20,21 +39,14 @@ controller.publish = async (req, res) => {
     const description = req.body.description;
     const uploadedFile = req.file;
 
-
-
-    // Log received data
-    console.log('Title:', title);
-    console.log('Description:', description);
-    console.log('Uploaded File:', uploadedFile);
-    console.log('user:', req.cookies.token)
-
+    // Create new database entry
     try {
+        // Get username
         let username = jwt.verify(req.cookies.token, process.env.JWT_SECRET).id
-        console.log(username)
-
+        // create entry
         let post = new Post({
             title: title,
-            image: uploadedFile.destination+uploadedFile.filename,
+            image: 'images/'+ uploadedFile.filename,
             description: description,
             user: username,
         });
@@ -43,33 +55,14 @@ controller.publish = async (req, res) => {
         console.error('Error verifying JWT:', err.message);
         return null;
     }
-    // console.log(req)
+}
 
+controller.posts = async (req, res) => {
+    // Get all posts from a user
+    let username = jwt.verify(req.cookies.token, process.env.JWT_SECRET).id
 
-    /*try {
-        let post = await Post.findOne({ username, title });
-        if (post) return res.status(400).json({ msg: 'Post already exists' });
-
-        // let file extension = filename.split('.').pop();??????????????????????????????????????????????????????????
-        let imgFilename ='../public/images/'+req.body.title + '-' + req.body.user
-        fs.writeFile(imgFilename, image.buffer, (err) => {
-            if (err) {
-                return res.status(500).json({ error: 'Failed to save image file.' });
-            }
-        });
-
-
-        post = new Post({
-            title: req.body.title,
-            image: imgFilename,
-            description: req.body.description,
-            user: req.body.user,
-        });
-        await post.save();
-        res.json({ message: 'Image and data uploaded successfully!'});
-    } catch (error) {
-        res.status(500).send('Server error');
-    }*/
+    let posts = await Post.find({user:username});
+    res.json(posts)
 }
 
 

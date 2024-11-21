@@ -59,9 +59,8 @@
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Your Album</h1>
-          <a href="#" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#newPost">Main call to
-            action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          <a class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#newPost">New Post</a>
+          <a href="#" class="btn btn-secondary my-2">Delete post</a>
           </p>
         </div>
       </div>
@@ -70,30 +69,22 @@
     <div class="album py-5 bg-light">
       <div class="container">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div id="container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-          <div class="col">
+          <!-- <div class="col">
             <div class="card shadow-sm">
-              <img src="img.png" style="width: 100%; height: 225px; object-fit: cover;">
-              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg> -->
-
+              <img src="images/66506c12ead9d0ad634b41defce9f6fa.jpg"
+                style="width: 100%; height: 225px; object-fit: cover;">
               <div class="card-body">
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
                   content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
+                  <h1>Title</h1>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -125,19 +116,20 @@
                   <label for="title">Title</label>
                   <input type="text" id="title" name="title" class="form-control" placeholder="Enter title" required>
                 </div>
-          
+
                 <!-- Description Field -->
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea id="description" name="description" class="form-control" rows="5" placeholder="Enter description" required></textarea>
+                  <textarea id="description" name="description" class="form-control" rows="5"
+                    placeholder="Enter description" required></textarea>
                 </div>
-          
+
                 <!-- Image Field -->
                 <div class="form-group">
                   <label for="image">Image</label>
                   <input id="filechooser" type="file" name="image" class="form-control" accept="image/*" required>
                 </div>
-          
+
                 <!-- Submit Button -->
                 <div class="form-group">
                   <label></label> <!-- Empty label for alignment -->
@@ -157,14 +149,21 @@
     align-items: center;
     margin-bottom: 1rem;
   }
+
   .form-group label {
-    width: 150px; /* Fixed width for labels */
-    margin-right: 1rem; /* Spacing between label and input */
+    width: 150px;
+    /* Fixed width for labels */
+    margin-right: 1rem;
+    /* Spacing between label and input */
   }
-  .form-control, textarea {
-    flex: 1; /* Inputs take up remaining space */
+
+  .form-control,
+  textarea {
+    flex: 1;
+    /* Inputs take up remaining space */
   }
 </style>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/build_album.js"></script>
+
 </html>
